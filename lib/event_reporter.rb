@@ -29,13 +29,16 @@ class EventReporter < Repl
       puts "\n-- Here are your people, sorted by #{attribute} -- \n\n\n"
     elsif input.include?("queue save to")
       filename_csv = input.split[3]
-      CSV.open(filename_csv, 'wb') do |csv|
+      CSV.open(filename_csv, 'w') do |csv|
         csv << ["last_name", "first_name", "email_address", "zipcode", "city", "state", "street", "homephone"]
-        csv << @queue.map(&:values)
+        @queue.each do |hash|
+          csv << hash.values
+          "\n"
+        end
         puts "\n-- You have succesfully created #{filename_csv} -- \n\n\n"
       end
     elsif input.include?("queue export html")
-
+      
     end
   end
 
@@ -73,7 +76,7 @@ class EventReporter < Repl
         end
       end
     end
-    puts "\n #{counter} #{attribute}'s matching #{criteria}, #{nil_counter} #{attribute}'s came back nil \n \n --------------------------------------------------------------------------------------"
+    puts "\n #{counter} #{attribute}'s matching #{criteria}, #{nil_counter} #{attribute}'s came back nil \n\n|||///|||///|||///|||///|||///|||///|||///|||///\n\n"
   end
 
   def load_csv(filename = 'full_event_attendees.csv')

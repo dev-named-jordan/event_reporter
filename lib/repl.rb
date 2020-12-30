@@ -39,6 +39,8 @@ class Repl
       load_csv(input.split[1])
     elsif input.include?("find")
       find_attribute_by_criteria(input.split[1].to_sym, input.split[2..-1].join(" ").to_s)
+    else
+    puts "\n\n\n++++++++++++++++++++++\n\nLooks like you have entered an invalid search\n\n++++++++++++++++++++++\n\n"
     end
     repl_start
   end
